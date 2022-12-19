@@ -1,7 +1,17 @@
 /*🌞 🌧️ 🌨️ ☁️ emojis for forecast5days*/
 var APIkey = "d47bf282954b0842d96677fee770a673"
 
-var url = `http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&units=imperial&appid=${APIkey}`;
+let searchInput = "seattle";
+
+var lat;
+
+var lon;
+
+var url = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=${APIkey}`;
+
+function fetchCurrentLocation() {
+  navigator.geolocation.getCurrentPosition((success) => (console.log(success)));
+}
 
 function fetchWeather() {
   fetch(url)
@@ -15,9 +25,8 @@ function fetchWeather() {
 
 fetchWeather();
 
-var searchInput = document.querySelector(".search")
-
-var city1 = document.querySelector(".city1")
+var city1 = document.querySelectorAll(".city")
+console.log(city1)
 var city2 = document.querySelector(".city2")
 var city3 = document.querySelector(".city3")
 var city4 = document.querySelector(".city4")
@@ -41,18 +50,23 @@ var precipitation3 = document.querySelector(".precipitation3")
 var precipitation4 = document.querySelector(".precipitation4")
 var precipitation5 = document.querySelector(".precipitation5")
 
+document.querySelector(".handleGetLocation").addEventListener("click",fetchCurrentLocation);
+
 function handleSearch() {
+  let searchInput = document.querySelector(".search")
+  console.log(searchInput)
+
   city1.textContent = "banana"
   city2.textContent = "banana"
   city3.textContent = "banana"
   city4.textContent = "banana"
   city5.textContent = "banana"
 
-  emoji1.textContent = "banana"
-  emoji2.textContent = "banana"
-  emoji3.textContent = "banana"
-  emoji4.textContent = "banana"
-  emoji5.textContent = "banana"
+  emoji1.textContent = "🌨️"
+  emoji2.textContent = "🌨️"
+  emoji3.textContent = "🌨️"
+  emoji4.textContent = "🌨️"
+  emoji5.textContent = "🌨️"
 
   temp1.textContent = "temp is banana"
   temp2.textContent = "temp is banana"
@@ -67,5 +81,3 @@ function handleSearch() {
   precipitation5.textContent = "raining banana"
 
 }
-
-handleSearch();
