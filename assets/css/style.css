@@ -8,3 +8,11 @@
 .forecast5days {
     transform: translateX(400px);
 }
+
+.individualResults {
+    color: rgb(248, 242, 227);
+}
+
+.textNavbar {
+    color: rgb(248, 242, 227);
+}

@@ -1,83 +1,63 @@
 /*🌞 🌧️ 🌨️ ☁️ emojis for forecast5days*/
 var APIkey = "d47bf282954b0842d96677fee770a673"
 
-let searchInput = "seattle";
-
 var lat;
 
 var lon;
 
-var url = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=${APIkey}`;
+var differentUrl = `https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}`
 
-function fetchCurrentLocation() {
-  navigator.geolocation.getCurrentPosition((success) => (console.log(success)));
-}
+var handleSearchButton = document.querySelector(".handleSearchButton");
 
-function fetchWeather() {
-  fetch(url)
+let searchInput = document.getElementById("search");
+
+var currentResults = document.querySelector(".currentResults");
+console.log("current results: " + currentResults)
+
+function fetchWeather(event) {
+  event.preventDefault();
+  console.log(searchInput.value);
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=imperial&appid=${APIkey}`)
     .then(function (response) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
+      displayCurrentWeather(data)
     })
 }
+  // use to grab log and lat
 
-fetchWeather();
 
-var city1 = document.querySelectorAll(".city")
-console.log(city1)
-var city2 = document.querySelector(".city2")
-var city3 = document.querySelector(".city3")
-var city4 = document.querySelector(".city4")
-var city5 = document.querySelector(".city5")
-
-var emoji1 = document.querySelector(".emoji1")
-var emoji2 = document.querySelector(".emoji2")
-var emoji3 = document.querySelector(".emoji3")
-var emoji4 = document.querySelector(".emoji4")
-var emoji5 = document.querySelector(".emoji5")
-
-var temp1 = document.querySelector(".temp1")
-var temp2 = document.querySelector(".temp2")
-var temp3 = document.querySelector(".temp3")
-var temp4 = document.querySelector(".temp4")
-var temp5 = document.querySelector(".temp5")
-
-var precipitation1 = document.querySelector(".precipitation1")
-var precipitation2 = document.querySelector(".precipitation2")
-var precipitation3 = document.querySelector(".precipitation3")
-var precipitation4 = document.querySelector(".precipitation4")
-var precipitation5 = document.querySelector(".precipitation5")
-
-document.querySelector(".handleGetLocation").addEventListener("click",fetchCurrentLocation);
-
-function handleSearch() {
-  let searchInput = document.querySelector(".search")
-  console.log(searchInput)
-
-  city1.textContent = "banana"
-  city2.textContent = "banana"
-  city3.textContent = "banana"
-  city4.textContent = "banana"
-  city5.textContent = "banana"
-
-  emoji1.textContent = "🌨️"
-  emoji2.textContent = "🌨️"
-  emoji3.textContent = "🌨️"
-  emoji4.textContent = "🌨️"
-  emoji5.textContent = "🌨️"
-
-  temp1.textContent = "temp is banana"
-  temp2.textContent = "temp is banana"
-  temp3.textContent = "temp is banana"
-  temp4.textContent = "temp is banana"
-  temp5.textContent = "temp is banana"
-
-  precipitation1.textContent = "raining banana"
-  precipitation2.textContent = "raining banana"
-  precipitation3.textContent = "raining banana"
-  precipitation4.textContent = "raining banana"
-  precipitation5.textContent = "raining banana"
-
+var individualResults = document.querySelector(".individualResults")
+// 
+for(var i = 0; i < 4; i++) {
+  // making the boxes
+  var createResults = document.createElement("div");
+  createResults.classList.add("col-auto", "border", "bg-primary");
+  createResults.textContent = "hippo"
+  var handleCreationTemp = document.createElement("div")
+  var handleCreationWind = document.createElement("div")
+  var handleCreationHumidity = document.createElement("div")
+  // need to create temp wind humidity 
+  // need to append to create results
+  individualResults.appendChild(createResults);
+  currentResults.appendChild(handleCreationTemp);
+  currentResults.appendChild(handleCreationWind);
+  currentResults.appendChild(handleCreationHumidity);
 }
+
+function displayCurrentWeather(data) {
+  console.log("Today's weather", data);
+  createResults.textContent = "Temp: " + data.main.temp;
+  handleCreationTemp.textContent = "Today's temperature in " + data.name + ": " + data.main.temp;
+  handleCreationWind = "Wind speed: " + data.wind.speed;
+  handleCreationHumidity = "Humidity percentage: " + data.main.humidity + "%";
+}
+
+var wind = document.querySelector(".wind");
+
+var temp = document.querySelector(".temp");
+
+var humidity = document.querySelector(".humidity");
+
+handleSearchButton.addEventListener("click", fetchWeather);

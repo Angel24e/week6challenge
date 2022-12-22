@@ -9,50 +9,27 @@
     <title>Weather</title>
 </head>
 <body>
-    <nav class="navbar-brand col-12 bg-primary text-center">Weather forecast</nav>
-    <button class="handleGetLocation bg-warning">🌞</button>
+    <nav class="textNavbar navbar-brand col-12 bg-primary text-center">Weather forecast</nav>
     <div class="bottomArea row p-3">
         <div class="searchArea col-4">
-            <header class="searchForCity col-12">Search for a city:</header>
-            <input class="search col-12">
+            <form action="">
+                <label for="search">Search for a city:</label>
+                <input type="search" name="search" id="search" class="search col-8">
+                <button type="submit" class="handleSearchButton">search</button>
+            </form>
             <hr class="">
             <div class="searchResults">search results</div>
         </div>
-        <div class="cityResults col-8 border border-start-1">city results</div>
+        <div class="currentResults col-8 border border-start-1"></div>
         <div class="forecast5days row">
             <header class="title">5-Day forecast</header>
             <div class="resultsParent"></div>
                 <div class="results container">
-                    <div class="row">
-                        <div class="individualResults col-auto border bg-primary">
-                            <div class="city">City</div>
-                            <div class="emoji1">Emoji</div>
-                            <div class="temp1">Temperature</div>
-                            <div class="precipitation1">precipitation</div>
-                        </div>
-                        <div class="individualResults col-auto border bg-primary">
-                            <div class="city">city</div>
-                            <div class="emoji2">Emoji</div>
-                            <div class="temp2">Temperature</div>
-                            <div class="precipitation2">precipitation</div>
-                        </div>
-                        <div class="individualResults col-auto border bg-primary">
-                            <div class="city">city</div>
-                            <div class="emoji3">Emoji</div>
-                            <div class="temp3">Temperature</div>
-                            <div class="precipitation3">precipitation</div>
-                        </div>
-                        <div class="individualResults col-auto border bg-primary">
-                            <div class="city">city</div>
-                            <div class="emoji4">Emoji</div>
-                            <div class="temp4">Temperature</div>
-                            <div class="precipitation4">precipitation</div>
-                        </div>
-                        <div class="individualResults col-auto border bg-primary">
-                            <div class="city">city</div>
-                            <div class="emoji5">emoji</div>
-                            <div class="temp5">Temperature</div>
-                            <div class="precipitation5">precipitation</div>
+                    <div class="individualResults row">
+                        <div class="col-auto border bg-primary">
+                            <div class="wind">wind</div>
+                            <div class="temp">Temperature</div>
+                            <div class="humidity">humidity</div>
                         </div>
                     </div>
                 </div>
