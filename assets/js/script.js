@@ -12,7 +12,6 @@ var handleSearchButton = document.querySelector(".handleSearchButton");
 let searchInput = document.getElementById("search");
 
 var currentResults = document.querySelector(".currentResults");
-console.log("current results: " + currentResults)
 
 function fetchWeather(event) {
   event.preventDefault();
@@ -22,7 +21,7 @@ function fetchWeather(event) {
       return response.json();
     })
     .then(function(data) {
-      displayCurrentWeather(data)
+      displayCurrentWeather(data);
     })
 }
   // use to grab log and lat
@@ -41,23 +40,19 @@ for(var i = 0; i < 4; i++) {
   // need to create temp wind humidity 
   // need to append to create results
   individualResults.appendChild(createResults);
-  currentResults.appendChild(handleCreationTemp);
-  currentResults.appendChild(handleCreationWind);
-  currentResults.appendChild(handleCreationHumidity);
 }
-
-function displayCurrentWeather(data) {
-  console.log("Today's weather", data);
-  createResults.textContent = "Temp: " + data.main.temp;
-  handleCreationTemp.textContent = "Today's temperature in " + data.name + ": " + data.main.temp;
-  handleCreationWind = "Wind speed: " + data.wind.speed;
-  handleCreationHumidity = "Humidity percentage: " + data.main.humidity + "%";
-}
-
-var wind = document.querySelector(".wind");
-
-var temp = document.querySelector(".temp");
-
-var humidity = document.querySelector(".humidity");
 
 handleSearchButton.addEventListener("click", fetchWeather);
+
+var currentCity = document.querySelector(".cityName");
+var currentTemp = document.querySelector(".currentTemp");
+var currentWind = document.querySelector(".currentWind");
+var currentHumidity = document.querySelector(".currentHumidity");
+
+function displayCurrentWeather(data) {
+  console.log("Current data: ",data);
+  currentCity.textContent = data.name;
+  currentTemp.textContent = "Temp: " + data.main.feels_like;
+  currentWind.textContent = "Wind Speed: " + data.wind.speed;
+  currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
+}
