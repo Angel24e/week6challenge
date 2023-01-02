@@ -13,6 +13,12 @@ let searchInput = document.getElementById("search");
 
 var currentResults = document.querySelector(".currentResults");
 
+var forecastTemp = document.querySelector(".temp");
+
+var forecastWind = document.querySelector(".wind");
+
+var forecastHumidity = document.querySelector(".humidity");
+
 function fetchWeather(event) {
   event.preventDefault();
   console.log(searchInput.value);
@@ -22,9 +28,23 @@ function fetchWeather(event) {
     })
     .then(function(data) {
       displayCurrentWeather(data);
+      fetchForecast(data);
     })
 }
-  // use to grab log and lat
+
+function fetchForecast(weather) {
+  fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${weather.coord.lat}&lon=${weather.coord.lon}&units=imperial&exclude={part}&appid=${APIkey}`)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    gather5day(data);
+  })
+}
+
+function gather5day(forecastData) {
+  forecastTemp.textContent = "banana";
+}
 
 
 var individualResults = document.querySelector(".individualResults")
@@ -52,7 +72,7 @@ var currentHumidity = document.querySelector(".currentHumidity");
 function displayCurrentWeather(data) {
   console.log("Current data: ",data);
   currentCity.textContent = data.name;
-  currentTemp.textContent = "Temp: " + data.main.feels_like;
-  currentWind.textContent = "Wind Speed: " + data.wind.speed;
+  currentTemp.textContent = "Temp: " + data.main.feels_like + " °";
+  currentWind.textContent = "Wind Speed: " + data.wind.speed + " mph";
   currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
 }
